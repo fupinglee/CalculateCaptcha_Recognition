@@ -2,10 +2,14 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+code.jpg
 # C extensions
 *.so
-
+datasets/*
+.idea/
+.DS_Store
+*.onnx
+*.pth
 # Distribution / packaging
 .Python
 build/
