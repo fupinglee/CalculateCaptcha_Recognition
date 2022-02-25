@@ -18,7 +18,7 @@ def predict(inputs):
     net.eval()  # 测试模式
     with torch.no_grad():
         outputs = net(inputs)
-        outputs = outputs.view(-1, len(common.captcha_array))  # 每37个就是一个字符
+        outputs = outputs.view(-1, len(common.captcha_array))  # 每16个就是一个字符
     return vec2Text(outputs)
 
 
@@ -40,7 +40,7 @@ def test():
         for inputs, labels in test_data_loader:
             pre = predict(inputs)
 
-            target = labels.view(-1, len(common.captcha_array))  # 每37个就是一个字符
+            target = labels.view(-1, len(common.captcha_array))  # 每16个就是一个字符
             target = vec2Text(target)  # 验证码文本
             outputs = net(inputs)
             acc += calculat_acc(outputs, labels)
@@ -81,5 +81,5 @@ def test_net(url):
 
 if __name__ == '__main__':
     test()
-    test_net("http://demo.ruoyi.vip/captcha/captchaImage?type=math&s=0.39236748354325024")
+    # test_net("http://demo.ruoyi.vip/captcha/captchaImage?type=math&s=0.39236748354325024")
     # print(test_pic("datasets/test/0+7=？_75ba9179485bcfa30dd00a09fb027231.jpg"))

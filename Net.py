@@ -15,21 +15,21 @@ class Net(nn.Module):
             nn.Conv2d(3, 16, kernel_size=3, padding=1),  # 3通道变成16通道，图片：60*160
             nn.BatchNorm2d(16),
             nn.ReLU(),
-            nn.MaxPool2d(2)  # 图片：22*70
+            nn.MaxPool2d(2)
         )
         # 第2层神经网络
         self.layer2 = nn.Sequential(
-            nn.Conv2d(16, 64, kernel_size=3),  # 16通道变成64通道，图片：20*68
+            nn.Conv2d(16, 64, kernel_size=3),  # 16通道变成64通道，图片：30*80
             nn.BatchNorm2d(64),
             nn.ReLU(),
-            nn.MaxPool2d(2)  # 图片：10*34
+            nn.MaxPool2d(2)
         )
         # 第3层神经网络
         self.layer3 = nn.Sequential(
-            nn.Conv2d(64, 128, kernel_size=3),  # 16通道变成64通道，图片：8*32
+            nn.Conv2d(64, 128, kernel_size=3),  # 64通道变成128通道，图片：14*39
             nn.BatchNorm2d(128),
             nn.ReLU(),
-            nn.MaxPool2d(2)  # 图片：4*16
+            nn.MaxPool2d(2)
         )
         # 第4层神经网络
         self.fc1 = nn.Sequential(
@@ -38,7 +38,7 @@ class Net(nn.Module):
             nn.ReLU()
         )
         # 第5层神经网络
-        self.fc2 = nn.Linear(1024, common.captcha_size * common.captcha_array.__len__())  # 6:验证码的长度， 37: 字母列表的长度
+        self.fc2 = nn.Linear(1024, common.captcha_size * common.captcha_array.__len__())  # 5:验证码的长度， 16: 字母列表的长度
 
     # 前向传播
     def forward(self, x):

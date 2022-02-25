@@ -1,0 +1,5 @@
+numpy==1.21.5
+Pillow==9.0.1
+requests==2.23.0
+torch==1.10.0+cu111
+torchvision==0.11.1+cu111
