@@ -16,6 +16,7 @@ net = Net()
 
 def predict(inputs):
     net.eval()  # 测试模式
+    net.to(torch.device('cuda:0' if torch.cuda.is_available() else 'cpu'))
     with torch.no_grad():
         outputs = net(inputs)
         outputs = outputs.view(-1, len(common.captcha_array))  # 每16个就是一个字符
@@ -27,7 +28,7 @@ def test():
     testpath = 'datasets/test/'
     transform = transforms.Compose([transforms.ToTensor()])  # 不做数据增强和标准化了
     test_data = CaptchaData(testpath, transform=transform)
-    test_data_loader = DataLoader(test_data, batch_size=64, num_workers=0, shuffle=True, drop_last=True)
+    test_data_loader = DataLoader(test_data, batch_size=1, num_workers=0, shuffle=True, drop_last=True)
     # 加载模型
     model_path = 'model.pth'
     if os.path.exists(model_path):
@@ -45,6 +46,7 @@ def test():
             outputs = net(inputs)
             acc += calculat_acc(outputs, labels)
             i += 1
+            print('验证码是：{}， 预测为：{}，结果{}'.format(target, pre, '正确' if pre == pre else '错误'))
     print('测试集正确率: %.3f %%' % (acc / i))
 
 

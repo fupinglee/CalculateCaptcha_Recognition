@@ -16,6 +16,8 @@ def calculat_acc(output, target):
     output = torch.argmax(output, dim=1)
     target = torch.argmax(target, dim=1)
     output, target = output.view(-1, common.captcha_size), target.view(-1, common.captcha_size)  # 每5个字符是一个验证码
+    target = target.to(device=torch.device('cuda:0' if torch.cuda.is_available() else 'cpu'))
+
     c = 0
 
     for i, j in zip(target, output):
